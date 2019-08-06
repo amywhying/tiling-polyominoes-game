@@ -1,2 +1,2 @@
-HI CINDY
-hello
+# Tiling Polyominoes Game 
+## Amy & Cindy
