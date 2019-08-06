@@ -1,2 +1,2 @@
 # Tiling Polyominoes Game 
-## Amy & Cindy
+## -- by Amy & Cindy
