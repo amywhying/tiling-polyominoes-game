@@ -26,7 +26,7 @@ public class Posn {
   /**
    * Randomly generates the next position coordinate.
    *
-   * @return the next square position
+   * @return the next square position on the board
    */
   public Posn randNext() {
     int[] work = new int[]{x, y};
