@@ -23,6 +23,11 @@ public class Posn {
     this.y = newY;
   }
 
+  /**
+   * Randomly generates the next position coordinate.
+   *
+   * @return the next square position
+   */
   public Posn randNext() {
     int[] work = new int[]{x, y};
     boolean addOrMinus = r.nextBoolean();
