@@ -80,8 +80,12 @@ public class PolyominoImpl implements Polyomino {
     this.board[first.getX()][first.getY()] = true;
     while (x > 0) {
       Posn work = worklist.get(0).randNext();
-      worklist.add(work);
-      this.board[work.getX()][work.getY()] = true;
+      if (work.hasPosn(worklist)) {
+        x += 1;
+      } else {
+        this.board[work.getX()][work.getY()] = true;
+        worklist.add(work);
+      }
       x -= 1;
     }
   }
