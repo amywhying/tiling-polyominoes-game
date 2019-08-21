@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Posn {
@@ -39,5 +41,19 @@ public class Posn {
       work[randInt] -= 1;
     }
     return new Posn(work[0], work[1]);
+  }
+
+  public boolean hasPosn(List<Posn> ps) {
+    for (Posn p : ps) {
+      if (p.sameAs(this)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean sameAs(Posn that) {
+    return this.getX() == that.getX()
+            && this.getY() == that.getY();
   }
 }
