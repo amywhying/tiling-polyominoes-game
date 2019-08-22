@@ -2,6 +2,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import model.Polyomino;
+import model.PolyominoImpl;
+import model.Posn;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class PolyominoTest {

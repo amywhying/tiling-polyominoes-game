@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -68,9 +70,6 @@ public class PolyominoImpl implements Polyomino {
     return gameState.toString();
   }
 
-  /**
-   * Randomly generates the solution.
-   */
   @Override
   public void randGenSolution(int count) {
     int x = count;
@@ -123,7 +122,6 @@ public class PolyominoImpl implements Polyomino {
    * Resets the current game.
    */
   void resetGame() {
-
   }
 
   /**
@@ -144,16 +142,20 @@ public class PolyominoImpl implements Polyomino {
    * Rotates the current solution tiles.
    */
   void rotateTiles() {
+
   }
 
+  @Override
   public boolean[][] getBoard() {
     return this.board;
   }
 
+  @Override
   public List<Tiles> getTiles() {
     return this.tiles;
   }
 
+  @Override
   public List<Posn> getSolution() {
     return this.solution;
   }
