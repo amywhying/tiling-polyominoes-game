@@ -36,9 +36,15 @@ public class Posn {
     if (addOrMinus) {
       int randInt = r.nextInt(2);
       work[randInt] += 1;
+      if (work[randInt] < 0 || work[randInt] > 7) {
+        work[randInt] -= 1;
+      }
     } else {
       int randInt = r.nextInt(2);
       work[randInt] -= 1;
+      if (work[randInt] < 0 || work[randInt] > 7) {
+        work[randInt] += 1;
+      }
     }
     return new Posn(work[0], work[1]);
   }
