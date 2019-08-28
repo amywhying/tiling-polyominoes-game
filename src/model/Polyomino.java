@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+package model;
+
 import java.util.List;
-import java.util.Random;
 
 /**
  * The main interface of the game.

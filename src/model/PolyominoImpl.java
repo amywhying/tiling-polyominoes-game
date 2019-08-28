@@ -1,9 +1,11 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Polyomino implementation.
+ * model.Polyomino implementation.
  */
 public class PolyominoImpl implements Polyomino {
   private boolean[][] board;
@@ -74,19 +76,22 @@ public class PolyominoImpl implements Polyomino {
   @Override
   public void randGenSolution(int count) {
     int x = count;
-    Posn first = genPos(9);
+    Posn first = genPos(8);
     List<Posn> worklist = new ArrayList<>();
     worklist.add(first);
     this.board[first.getX()][first.getY()] = true;
     while (x > 0) {
       Posn work = worklist.get(0).randNext();
       if (work.hasPosn(worklist)) {
+
+        // TODO: THIS SHIT CREATES AN INFINITE LOOP;
         x += 1;
       } else {
         this.board[work.getX()][work.getY()] = true;
         worklist.add(work);
       }
       x -= 1;
+      System.out.println(x);
     }
   }
 

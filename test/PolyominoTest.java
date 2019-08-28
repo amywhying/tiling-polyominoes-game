@@ -2,6 +2,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import model.Polyomino;
+import model.PolyominoImpl;
+import model.Posn;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class PolyominoTest {
@@ -25,7 +29,7 @@ public class PolyominoTest {
     mt.add(new Posn(3, 3));
     mt.add(new Posn(3, 4));
     mt.add(new Posn(3, 5));
-    game1.randGenSolution(2);
+    game1.randGenSolution(5);
     assertEquals("_ _ _ _ _ _ _ _ \n" +
             "_ _ _ _ _ _ _ _ \n" +
             "_ _ _ _ _ _ _ _ \n" +
