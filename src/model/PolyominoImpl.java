@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -13,6 +15,7 @@ public class PolyominoImpl implements Polyomino {
   private List<Tiles> tiles = new ArrayList<Tiles>();
   private Random rand = new Random();
   private List<Posn> solution = new ArrayList<Posn>();
+  private Map<Integer, Posn> lot = new HashMap<Integer, Posn>();
 
   /**
    * Initializes the board to the given x * y size. For the board, true refers to a solution tile,
@@ -62,12 +65,22 @@ public class PolyominoImpl implements Polyomino {
       for (int j = 0; j < this.board[i].length; j++) {
         if (!this.board[i][j]) {
           gameState.append("_ ");
-        } else {
-          gameState.append("O ");
+        }
+        if (new Posn(i, j).hasPosn(solution)) {
+          gameState.append(String.valueOf(getTileNum(i, j)) + " ");
         }
       }
     }
     return gameState.toString();
+  }
+
+  private int getTileNum(int i, int j) {
+    return new Posn(i, j).findPosn(solution) / 8;
+  }
+
+  @Override
+  public void showSolution() {
+
   }
 
   /**
@@ -81,17 +94,15 @@ public class PolyominoImpl implements Polyomino {
     worklist.add(first);
     this.board[first.getX()][first.getY()] = true;
     while (x > 0) {
-      Posn work = worklist.get(0).randNext();
+      Posn work = worklist.get(rand.nextInt(worklist.size())).randNext();
       if (work.hasPosn(worklist)) {
-
-        // TODO: THIS SHIT CREATES AN INFINITE LOOP;
         x += 1;
       } else {
         this.board[work.getX()][work.getY()] = true;
         worklist.add(work);
+        this.solution.add(work);
       }
       x -= 1;
-      System.out.println(x);
     }
   }
 
@@ -115,13 +126,6 @@ public class PolyominoImpl implements Polyomino {
       }
     }
     return true;
-  }
-
-  /**
-   * Shows the solution of the game.
-   */
-  @Override
-  public void showSolution() {
   }
 
   /**

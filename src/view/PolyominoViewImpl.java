@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class PolyominoViewImpl extends JFrame implements PolyominoView {
 
-  public DrawingPanel panel;
+//  public DrawingPanel panel;
   JScrollPane scrollBar;
   private int width;
   private int height;
