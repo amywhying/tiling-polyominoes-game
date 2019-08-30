@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeoutException;
 
 import static model.GameMode.*;
 
@@ -122,21 +123,28 @@ public class PolyominoImpl implements Polyomino {
     int y = getTilesCount(x);
     Posn posn = genPos(this.x, this.y);
     while (y > 0) {
-
       Posn latestPosn = posn;
       List<Posn> worklist = new ArrayList<>();
       worklist.add(latestPosn);
       this.solution.add(latestPosn);
       this.board[latestPosn.getX()][latestPosn.getY()] = true;
 
+      // To prevent infinite loop
+      int count = 0;
+
       while (x > 1) {
         Posn work = worklist.get(rand.nextInt(worklist.size())).randNext(this.x, this.y);
         if (work.hasPosn(this.solution)) {
           x += 1;
+          count++;
         } else {
           this.board[work.getX()][work.getY()] = true;
           worklist.add(work);
           this.solution.add(work);
+        }
+        if (count >= x * 12) {
+          // Breaks the loop if it is too long (it could not find any viable neighbors to link to).
+          break;
         }
         x -= 1;
       }
