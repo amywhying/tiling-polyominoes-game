@@ -18,8 +18,7 @@ public class PolyominoViewImpl extends JFrame implements PolyominoView {
     panel = new Drawing();
     panel.setBackground(Color.WHITE);
 
-    setSize(600, 600);
-    panel.setPreferredSize(new Dimension(1000, 1000));
+    setSize(1000, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(true);
 
