@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import model.Polyomino;
 import model.Posn;
+import model.Tiles;
 
 /**
  *
@@ -39,9 +40,11 @@ public class Drawing extends JPanel implements IDrawing {
         }
       }
 
-      for (Posn tile : p.getSolution()) {
-        g.setColor(Color.CYAN);
-        g.fillRect(tile.getX() * 50 + 500, tile.getY() * 50 + 10, 50, 50);
+      for (Tiles tile : p.getTiles()) {
+        g.setColor(tile.getColor());
+        for (Posn posn : tile.getShape()) {
+          g.fillRect(posn.getX() * 50 + 500, posn.getY() * 50 + 10, 50, 50);
+        }
       }
     }
   }

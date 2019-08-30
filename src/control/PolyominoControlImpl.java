@@ -16,7 +16,8 @@ public class PolyominoControlImpl implements PolyominoControl {
    * Initializes a control implementation to the default model and view.
    */
   public PolyominoControlImpl() {
-
+    this.model = new PolyominoImpl();
+    this.view = new PolyominoViewImpl();
   }
 
   /**
@@ -39,7 +40,7 @@ public class PolyominoControlImpl implements PolyominoControl {
 
   @Override
   public void newPuzzle() {
-
+    this.model.newPuzzle();
   }
 
   @Override

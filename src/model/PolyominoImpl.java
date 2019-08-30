@@ -1,13 +1,16 @@
 package model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static model.GameMode.*;
+
 /**
- * model.Polyomino implementation.
+ * Polyomino implementation.
  */
 public class PolyominoImpl implements Polyomino {
   private boolean[][] board;
@@ -16,6 +19,11 @@ public class PolyominoImpl implements Polyomino {
   private Random rand = new Random();
   private List<Posn> solution = new ArrayList<Posn>();
   private Map<Integer, Posn> lot = new HashMap<Integer, Posn>();
+  // The difficulty will always be defaulted to easy. It can be changed later by "newPuzzle" after
+  // selecting a new level;
+  private GameMode difficulty = EASY;
+  private int x;
+  private int y;
 
   /**
    * Initializes the board to the given x * y size. For the board, true refers to a solution tile,
@@ -26,6 +34,9 @@ public class PolyominoImpl implements Polyomino {
    */
   public PolyominoImpl(int x, int y) {
     initializeBoard(x, y);
+    this.x = x;
+    this.y = y;
+    randGenSolution();
   }
 
   /**
@@ -34,6 +45,9 @@ public class PolyominoImpl implements Polyomino {
    */
   public PolyominoImpl() {
     initializeBoard(8, 8);
+    this.x = 8;
+    this.y = 8;
+    randGenSolution();
   }
 
   /**
@@ -80,9 +94,6 @@ public class PolyominoImpl implements Polyomino {
     return gameState.toString();
   }
 
-<<<<<<< HEAD:src/model/PolyominoImpl.java
-=======
-
   /**
    * This method generates number according to all the tiles in the solution. So the first to the
    * eighth tile in the solution will be marked as 0, the ninth to 16th will be marked as 1 and so
@@ -99,53 +110,83 @@ public class PolyominoImpl implements Polyomino {
 
   /**
    * The algorithm picks a random block from the worklist and the next one goes to one of the four
-   * corners. If the next block already exists, then it will pick another random block from the
-   * worklist again and get another block until the count is exhausted.
-   *
-   * @param count is how many tiles you want to make a polyomino
+   * corners. If the next block already exists, continue finding another viable block. The number of
+   * blocks for each tile and the number of tiles for each game (the polyomino) is represented by
+   * the value x and y respectively. They are varied depending on the game difficulty and the size
+   * of the game board.
    */
->>>>>>> a3e0692397b13bcc0b6fdb5e02db2881fd284562:src/model/PolyominoImpl.java
+  // @param count is how many tiles you want to make a polyomino
   @Override
-  public void randGenSolution(int count) {
-    int x = count;
-    Posn first = genPos(8);
-    List<Posn> worklist = new ArrayList<>();
-//    List<Posn> oneTile = new ArrayList<>();
-//    oneTile.add(first);
-    worklist.add(first);
-    this.solution.add(first);
-    this.board[first.getX()][first.getY()] = true;
-    while (x > 0) {
-<<<<<<< HEAD:src/model/PolyominoImpl.java
-      Posn work = worklist.get(0).randNext();
-=======
-      Posn work = worklist.get(rand.nextInt(worklist.size())).randNext();
->>>>>>> a3e0692397b13bcc0b6fdb5e02db2881fd284562:src/model/PolyominoImpl.java
-      if (work.hasPosn(worklist)) {
-        x += 1;
-      } else {
-        this.board[work.getX()][work.getY()] = true;
-        worklist.add(work);
-<<<<<<< HEAD:src/model/PolyominoImpl.java
-=======
-        this.solution.add(work);
->>>>>>> a3e0692397b13bcc0b6fdb5e02db2881fd284562:src/model/PolyominoImpl.java
+  public void randGenSolution() {
+    int x = getBlocksCount();
+    int y = getTilesCount(x);
+    Posn posn = genPos(this.x, this.y);
+    while (y > 0) {
+
+      Posn latestPosn = posn;
+      List<Posn> worklist = new ArrayList<>();
+      worklist.add(latestPosn);
+      this.solution.add(latestPosn);
+      this.board[latestPosn.getX()][latestPosn.getY()] = true;
+
+      while (x > 1) {
+        Posn work = worklist.get(rand.nextInt(worklist.size())).randNext(this.x, this.y);
+        if (work.hasPosn(this.solution)) {
+          x += 1;
+        } else {
+          this.board[work.getX()][work.getY()] = true;
+          worklist.add(work);
+          this.solution.add(work);
+        }
+        x -= 1;
       }
-      x -= 1;
+      x = getBlocksCount();
+      Color color = randColor();
+      Tiles tile = new Tiles(color);
+      tile.addPosns(worklist);
+      this.tiles.add(tile);
+      posn = worklist.get(worklist.size() - 1);
+      y -= 1;
+    }
+  }
+
+  private int getBlocksCount() throws IllegalArgumentException {
+    int max = this.x * this.y;
+    switch (this.difficulty) {
+      case EASY:
+        return (int) Math.round(max * 0.10);
+      case MEDIUM:
+        return (int) Math.round(max * 0.20);
+      case HARD:
+        return (int) Math.round(max * 0.30);
+      default:
+        throw new IllegalArgumentException("Difficulty cannot be identified");
+    }
+  }
+
+  private int getTilesCount(int blocks) throws IllegalArgumentException {
+    int max = this.x * this.y;
+    switch (this.difficulty) {
+      case EASY:
+        return (int) Math.round(max * 0.40 / blocks);
+      case MEDIUM:
+        return (int) Math.round(max * 0.50 / blocks);
+      case HARD:
+        return (int) Math.round(max * 0.60 / blocks);
+      default:
+        throw new IllegalArgumentException("Difficulty cannot be identified");
     }
   }
 
 
-  private Posn genPos(int max) {
-    return new Posn(rand.nextInt(max), rand.nextInt(max));
+  private Posn genPos(int maxX, int maxY) {
+    return new Posn(rand.nextInt(maxX), rand.nextInt(maxY));
   }
 
+  private Color randColor() {
+    return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+  }
 
-  /**
-   * Determines if the game is over.
-   *
-   * @return true if all the shaded area has been covered.
-   */
   @Override
   public boolean gameOver() {
     for (boolean[] row : board) {
@@ -158,23 +199,24 @@ public class PolyominoImpl implements Polyomino {
     return true;
   }
 
+  @Override
+  public void newPuzzle() {
+    initializeBoard(x, y);
+    randGenSolution();
+  }
+
+
   /**
    * Resets the current game.
    */
   void resetGame() {
+
   }
 
   /**
    * Creates and updates the timer of the game every second.
    */
   void gameTimer() {
-
-  }
-
-  /**
-   * Generates a new puzzle of the current selected game level.
-   */
-  void newPuzzle() {
 
   }
 

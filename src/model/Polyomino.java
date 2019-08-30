@@ -9,7 +9,7 @@ public interface Polyomino {
   /**
    * Randomly generates the solution.
    */
-  void randGenSolution(int count);
+  void randGenSolution();
 
   /**
    * Determines if the game is over.
@@ -24,15 +24,37 @@ public interface Polyomino {
   void showSolution();
 
   /**
+   * Generates a new puzzle of the current selected game level.
+   */
+  void newPuzzle();
+
+  /**
    * Produces a visual representation of the board.
    *
    * @return current state
    */
   String getState();
 
+  /**
+   * Returns the 2D boolean array representation of the board. True represents a grey area of
+   * existing tile, false represents a plain (white) area of non-existing tile.
+   *
+   * @return the board of 2D boolean array type.
+   */
   boolean[][] getBoard();
 
+  /**
+   * Returns a list of solution tiles of the game, where each tile represents a part of the
+   * solution.
+   *
+   * @return the tiles solution.
+   */
   List<Tiles> getTiles();
 
+  /**
+   * Returns the solution of the game, represented by a list of posns.
+   *
+   * @return the posns solution.
+   */
   List<Posn> getSolution();
 }
