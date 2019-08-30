@@ -29,7 +29,6 @@ public class PolyominoControlImpl implements PolyominoControl {
 
   @Override
   public void run() {
-    model.randGenSolution(7);
     view.render(model);
   }
 

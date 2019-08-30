@@ -14,6 +14,7 @@ public final class Execute {
   public static void main(String[] args) {
     Polyomino model = new PolyominoImpl();
     PolyominoView view = new PolyominoViewImpl();
+    model.randGenSolution(7);
     PolyominoControl controller = new PolyominoControlImpl(model, view);
     controller.run();
 >>>>>>> a3e0692397b13bcc0b6fdb5e02db2881fd284562
