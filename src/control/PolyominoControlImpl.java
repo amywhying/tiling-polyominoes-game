@@ -9,8 +9,8 @@ import view.PolyominoViewImpl;
  * Control implementation.
  */
 public class PolyominoControlImpl implements PolyominoControl {
-  Polyomino model = new PolyominoImpl();
-  PolyominoView view = new PolyominoViewImpl();
+  Polyomino model;
+  PolyominoView view;
 
   /**
    * Initializes a control implementation to the default model and view.
@@ -25,6 +25,12 @@ public class PolyominoControlImpl implements PolyominoControl {
   public PolyominoControlImpl(Polyomino model, PolyominoView view) {
     this.model = model;
     this.view = view;
+  }
+
+  @Override
+  public void run() {
+    model.randGenSolution(7);
+    view.render(model);
   }
 
   @Override

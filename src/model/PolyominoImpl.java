@@ -65,15 +65,27 @@ public class PolyominoImpl implements Polyomino {
       for (int j = 0; j < this.board[i].length; j++) {
         if (!this.board[i][j]) {
           gameState.append("_ ");
+        } else {
+          gameState.append("O ");
         }
-        if (new Posn(i, j).hasPosn(solution)) {
-          gameState.append(String.valueOf(getTileNum(i, j)) + " ");
-        }
+
+        /** This part plainly to check if all the
+         polynomioes are correctly positioned. */
+
+//        if (new Posn(i, j).hasPosn(solution)) {
+//          gameState.append(getTileNum(i, j) + " ");
+//        }
       }
     }
     return gameState.toString();
   }
 
+
+  /**
+   * This method generates number according to all the tiles in the solution. So the first to the
+   * eighth tile in the solution will be marked as 0, the ninth to 16th will be marked as 1 and so
+   * on.
+   */
   private int getTileNum(int i, int j) {
     return new Posn(i, j).findPosn(solution) / 8;
   }
@@ -84,14 +96,21 @@ public class PolyominoImpl implements Polyomino {
   }
 
   /**
-   * Randomly generates the solution.
+   * The algorithm picks a random block from the worklist and the next one goes to one of the four
+   * corners. If the next block already exists, then it will pick another random block from the
+   * worklist again and get another block until the count is exhausted.
+   *
+   * @param count is how many tiles you want to make a polyomino
    */
   @Override
   public void randGenSolution(int count) {
     int x = count;
     Posn first = genPos(8);
     List<Posn> worklist = new ArrayList<>();
+//    List<Posn> oneTile = new ArrayList<>();
+//    oneTile.add(first);
     worklist.add(first);
+    this.solution.add(first);
     this.board[first.getX()][first.getY()] = true;
     while (x > 0) {
       Posn work = worklist.get(rand.nextInt(worklist.size())).randNext();
@@ -105,6 +124,7 @@ public class PolyominoImpl implements Polyomino {
       x -= 1;
     }
   }
+
 
   private Posn genPos(int max) {
     return new Posn(rand.nextInt(max), rand.nextInt(max));

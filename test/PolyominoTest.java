@@ -29,7 +29,7 @@ public class PolyominoTest {
     mt.add(new Posn(3, 3));
     mt.add(new Posn(3, 4));
     mt.add(new Posn(3, 5));
-    game1.randGenSolution(31);
+    game1.randGenSolution(7);
     assertEquals("_ _ _ _ _ _ _ _ \n" +
             "_ _ _ _ _ _ _ _ \n" +
             "_ _ _ _ _ _ _ _ \n" +

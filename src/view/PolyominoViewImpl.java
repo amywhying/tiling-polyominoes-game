@@ -1,20 +1,36 @@
 package view;
 
+import java.awt.*;
+
 import javax.swing.*;
+
+import model.Polyomino;
 
 /**
  * View implementation.
  */
 public class PolyominoViewImpl extends JFrame implements PolyominoView {
 
-//  public DrawingPanel panel;
-  JScrollPane scrollBar;
-  private int width;
-  private int height;
-  private int tickSpeed = 1;
+  private final Drawing panel;
 
   public PolyominoViewImpl() {
+    super();
+    panel = new Drawing();
+    panel.setBackground(Color.WHITE);
 
+    setSize(600, 600);
+    panel.setPreferredSize(new Dimension(1000, 1000));
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setResizable(true);
+
+    add(panel);
+
+    setVisible(true);
+  }
+
+  @Override
+  public void render(Polyomino model) {
+    panel.draw(model);
   }
 
   /*@Override
