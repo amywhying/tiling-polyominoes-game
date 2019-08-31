@@ -43,7 +43,7 @@ public class Drawing extends JPanel implements IDrawing {
       for (Tiles tile : p.getTiles()) {
         g.setColor(tile.getColor());
         for (Posn posn : tile.getShape()) {
-          g.fillRect(posn.getX() * 50 + 500, posn.getY() * 50 + 10, 50, 50);
+          g.fillRect(posn.getX() * 50 + 10, posn.getY() * 50 + 10, 50, 50);
         }
       }
     }
