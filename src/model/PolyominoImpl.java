@@ -211,6 +211,8 @@ public class PolyominoImpl implements Polyomino {
 
   @Override
   public void newPuzzle() {
+    tiles.clear();
+    solution.clear();
     initializeBoard(x, y);
     randGenSolution();
   }

@@ -32,12 +32,18 @@ public class PolyominoViewImpl extends JFrame implements PolyominoView, ActionLi
     hideSolution.setActionCommand("hide");
     hideSolution.addActionListener(this);
 
+    JButton newPuzzle = new JButton("New Puzzle");
+
+    newPuzzle.setActionCommand("new");
+    newPuzzle.addActionListener(this);
+
     JPanel botPanel = new JPanel();
     setSize(1000, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(true);
     botPanel.add(showSolution);
     botPanel.add(hideSolution);
+    botPanel.add(newPuzzle);
     add(botPanel, BorderLayout.SOUTH);
     add(panel);
     setVisible(true);
@@ -72,6 +78,9 @@ public class PolyominoViewImpl extends JFrame implements PolyominoView, ActionLi
           break;
         case "hide":
           feat.hideSolution();
+          break;
+        case "new":
+          feat.newPuzzle();
           break;
       }
     }

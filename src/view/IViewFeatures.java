@@ -1,11 +1,15 @@
 package view;
 
 public interface IViewFeatures {
-  void showPuzzle();
 
   void showSolution();
 
   void hideSolution();
 
-  void showTiles();
+  /**
+   * Generates a new puzzle of the current selected game level.
+   */
+  void newPuzzle();
+
+
 }

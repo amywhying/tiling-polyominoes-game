@@ -32,7 +32,6 @@ public class PolyominoControlImpl implements PolyominoControl, IViewFeatures {
   public PolyominoControlImpl(Polyomino model, PolyominoView view) {
     this.model = model;
     this.view = view;
-    tiles.addAll(model.getTiles());
     try {
       view.addListener(this);
     } catch (UnsupportedOperationException e) {
@@ -42,6 +41,7 @@ public class PolyominoControlImpl implements PolyominoControl, IViewFeatures {
 
   @Override
   public void run() {
+    tiles.addAll(model.getTiles());
     model.getTiles().clear();
     view.render(model);
   }
@@ -53,16 +53,13 @@ public class PolyominoControlImpl implements PolyominoControl, IViewFeatures {
 
   @Override
   public void newPuzzle() {
-    this.model.newPuzzle();
+    model.newPuzzle();
+    tiles.clear();
+    run();
   }
 
   @Override
   public void rotateTiles() {
-
-  }
-
-  @Override
-  public void showPuzzle() {
 
   }
 
@@ -82,8 +79,4 @@ public class PolyominoControlImpl implements PolyominoControl, IViewFeatures {
     view.render(model);
   }
 
-  @Override
-  public void showTiles() {
-
-  }
 }
