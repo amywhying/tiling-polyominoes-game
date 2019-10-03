@@ -38,7 +38,7 @@ public class PolyominoViewImpl extends JFrame implements PolyominoView, ActionLi
     newPuzzle.addActionListener(this);
 
     JPanel botPanel = new JPanel();
-    setSize(1000, 600);
+    setSize(600, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(true);
     botPanel.add(showSolution);
