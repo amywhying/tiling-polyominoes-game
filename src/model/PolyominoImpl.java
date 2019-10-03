@@ -35,8 +35,8 @@ public class PolyominoImpl implements Polyomino {
    */
   public PolyominoImpl(int x, int y) {
     initializeBoard(x, y);
-    this.x = x;
-    this.y = y;
+//    this.x = x;
+//    this.y = y;
     randGenSolution();
   }
 
@@ -46,8 +46,8 @@ public class PolyominoImpl implements Polyomino {
    */
   public PolyominoImpl() {
     initializeBoard(8, 8);
-    this.x = 8;
-    this.y = 8;
+//    this.x = 8;
+//    this.y = 8;
     randGenSolution();
   }
 
@@ -58,6 +58,8 @@ public class PolyominoImpl implements Polyomino {
    * @param y represents the height of the board.
    */
   private void initializeBoard(int x, int y) {
+    this.x = x;
+    this.y = y;
     this.board = new boolean[x][y];
     for (int i = 0; i < this.board.length; i++) {
       for (int j = 0; j < this.board[i].length; j++) {
@@ -209,6 +211,8 @@ public class PolyominoImpl implements Polyomino {
 
   @Override
   public void newPuzzle() {
+    tiles.clear();
+    solution.clear();
     initializeBoard(x, y);
     randGenSolution();
   }

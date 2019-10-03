@@ -16,11 +16,6 @@ public interface PolyominoControl {
   void resetGame();
 
   /**
-   * Generates a new puzzle of the current selected game level.
-   */
-  void newPuzzle();
-
-  /**
    * Rotates the current solution tiles.
    */
   void rotateTiles();
