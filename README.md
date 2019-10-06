@@ -16,7 +16,7 @@ The second snapshot demonstrates the game state after all the polyonomies are co
 ![Gameover](result.png)
 
 ## Future Implementations
-Besides the current implementations of the game, we decide to add difficulty levels to the game with different sizes of boards and polyominoes. We also hope to make it into an app in the future.
+Besides the current implementations of the game, we have decided to add difficulty levels to the game with different sizes of boards and polyominoes. There is also a possiblity for users to customize the difficulty (By inputing the desired board size, number of polyominoes, and/or number of blocks per each polyominoe.) Additionally, we hope to transform it into an app in the future.
 
 ## Creators
 [Cindy Luo](https://github.com/cindy1u0) & [Amy Ying](https://github.com/amywhying)
