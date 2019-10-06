@@ -17,4 +17,4 @@ The second snapshot demonstrates the game state after all the polyonomies are co
 Besides the current implementations of the game, we decide to add difficulty levels to the game with different sizes of boards and polyominoes. We also hope to make it into an app in the future.
 
 ## Creators
-[Cindy Luo](https://github.com/cindy1u0) and [Amy Ying](https://github.com/amywhying)
+[Cindy Luo](https://github.com/cindy1u0) & [Amy Ying](https://github.com/amywhying)
